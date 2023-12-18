@@ -173,12 +173,14 @@ async function run() {
          `Failed to delete secret with statusCode: ${response?.statusCode}`
       )
       core.warning(response?.body?.metadata)
+      core.info(JSON.stringify(response))
    }
    core.info('Deleting secret:')
    core.info(JSON.stringify(deleteSecretResponse?.response?.body, undefined, 2))
 
    const secret = await buildSecret(secretName, namespace)
    core.info('Creating secret')
+   core.info(JSON.stringify(secret))
    try {
       await api.createNamespacedSecret(namespace, secret)
    } catch (err) {
