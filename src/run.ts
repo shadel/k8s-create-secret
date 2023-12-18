@@ -168,12 +168,12 @@ async function run() {
          secretName,
          namespace
       )
-   } catch ({response}) {
+   } catch (err) {
       core.warning(
-         `Failed to delete secret with statusCode: ${response?.statusCode}`
+         `Failed to delete secret with statusCode: ${err?.response?.statusCode}`
       )
-      core.warning(response?.body?.metadata)
-      core.info(JSON.stringify(response))
+      core.warning(err?.response?.body?.metadata)
+      core.info(JSON.stringify(err))
    }
    core.info('Deleting secret:')
    core.info(JSON.stringify(deleteSecretResponse?.response?.body, undefined, 2))
